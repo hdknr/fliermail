@@ -31,7 +31,7 @@ class MailTemplate(object):
 
     def sendmail(self, recipients=[], from_email=None, dry=False, **context):
         recipients = recipients or [self.from_address]
-        context = dict(entry=self)
+        context['instance'] = self
         mail = self.create(recipients, from_email=from_email, context=context)
         if not dry:
             mail.send()
